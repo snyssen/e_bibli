@@ -14,6 +14,6 @@ namespace e_bibli.Models
 		[Required]
 		public DateTime DateParution { get; set; }
 		[Required]
-		public Auteur Auteur { get; set; }
+		public int IDAuteur { get; set; }
 	}
 }

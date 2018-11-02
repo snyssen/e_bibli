@@ -1,0 +1,34 @@
+﻿@using e_bibli.Models
+@model e_bibli.ViewModels.Afficher.LivreViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Livre</title>
+</head>
+<body>
+	<h1>@Model.livre.Nom</h1>
+	<h2>@Model.auteur.Nom @Model.auteur.Prenom</h2>
+	<p>Sortie : @Model.livre.DateParution.ToShortDateString()</p>
+	<br />
+	<p>Est actuellement emprunté par : @(Model.emprunteurActuel != null ? Model.emprunteurActuel.Nom : "N/A")</p>
+	<hr />
+	<p>A été emprunté dans le passé par :</p>
+	<ul>
+		@foreach (Client client in Model.emprunteursPasses)
+		{
+			<li>@client.Nom</li>
+		}
+	</ul>
+	<br />
+	<hr />
+	<br />
+	@Html.ActionLink("Retourner à l'accueil", "Index", "Home")
+</body>
+</html>

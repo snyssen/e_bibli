@@ -1,0 +1,64 @@
+﻿@using e_bibli.Models
+@using e_bibli.ViewModels.Afficher
+@model e_bibli.ViewModels.Afficher.IndexViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Notre sélection</title>
+	<style>
+		table {
+			border-style: solid;
+			border-width: thick;
+		}
+		.fst {
+			border-style: solid;
+			border-width: thick;
+			background-color: aquamarine;
+		}
+		.scd {
+			border-style: solid;
+			border-width: thick;
+		}
+		td {
+			border-style: dotted;
+			border-width: thin;
+		}
+	</style>
+</head>
+<body>
+	<table>
+		<tr>
+			<th class="fst" colspan="2">Livre</th>
+			<th class="fst" colspan="2">Auteur</th>
+		</tr>
+		<tr>
+			<th class="scd">Nom</th>
+			<th class="scd">Date de parution</th>
+
+			<th class="scd">Nom</th>
+			<th class="scd">Prénom</th>
+		</tr>
+		@foreach (LivreAut livreAut in Model.livreAuts)
+		{
+			<tr>
+				<td>@livreAut.Livre.Nom</td>
+				<td>@livreAut.Livre.DateParution.ToShortDateString()</td>
+
+				<td>@livreAut.Auteur.Nom</td>
+				<td>@livreAut.Auteur.Prenom</td>
+			</tr>
+		}
+	</table>
+	<br />
+	<hr />
+	<br />
+	@Html.ActionLink("Retourner à l'accueil", "Index", "Home")
+</body>
+</html>

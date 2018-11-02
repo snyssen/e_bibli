@@ -14,9 +14,9 @@ namespace e_bibli.Models
 		Auteur ObtenirAuteur(int id);
 		void ModifierAuteur(int id, string nom, string prenom);
 		bool AuteurExiste(string nom);
+		bool AuteurExiste(int IDauteur);
 
 		// Client
-		List<Livre> ObtenirTousLesLivres();
 		Client ObtenirClient(int id);
 		Client ObtenirClient(string idStr);
 		int AjouterClient(string nom, string mail, string motDePasse);
@@ -24,8 +24,11 @@ namespace e_bibli.Models
 		Client AuthentifierMail(string email, string motDePasse);
 
 		// Livre
-		int AjouterLivre(string titre, DateTime dateParution, Auteur auteur);
+		int AjouterLivre(string titre, DateTime dateParution, int IDauteur);
 		Livre ObtenirLivre(int id);
+		List<Livre> ObtenirTousLesLivres();
+		List<Livre> ObtenirLivresAuteur(int IDauteur);
+		bool LivreExiste(int IDlivre);
 
 		// Emprunt
 		int AjouterEmprunt(int idClient, int idLivre, DateTime dateEmprunt);
@@ -33,5 +36,7 @@ namespace e_bibli.Models
 		void ModifierEmprunt(int id, int idClient, int idLivre, DateTime dateEmprunt);
 		void RetournerEmprunt(int id);
 		Emprunt ObtenirEmprunt(int id);
+		List<Emprunt> ObtenirEmpruntsClient(int IDclient);
+		List<Emprunt> ObtenirEmpruntsLivre(int IDlivre);
 	}
 }

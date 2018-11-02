@@ -155,16 +155,27 @@ namespace e_bibli.Tests
 		[TestMethod]
 		public void AjouterLivre__NouveauLivreEtRecuperation_LeLivreEstBienRecupere() {
 			int idAuteur = dal.AjouterAuteur("Asimov", "Isaac");
-			Auteur auteurLivre = dal.ObtenirAuteur(idAuteur);
-			dal.AjouterLivre("I, Robot", DateTime.Parse("12/02/1950"), auteurLivre);
+			dal.AjouterLivre("I, Robot", DateTime.Parse("12/02/1950"), idAuteur);
 			Livre livreTrouve = dal.ObtenirLivre(1);
 
 			DateTime dateParution = DateTime.Parse("12/02/1950");
-			Assert.IsNotNull(auteurLivre);
 			Assert.IsNotNull(livreTrouve);
 			Assert.AreEqual("I, Robot", livreTrouve.Nom);
 			Assert.AreEqual(dateParution, livreTrouve.DateParution);
-			Assert.AreEqual(auteurLivre, livreTrouve.Auteur);
+			Assert.AreEqual(idAuteur, livreTrouve.IDAuteur);
+		}
+		[TestMethod]
+		public void AjouterLivres_ObtenirTousLesLivres_IlsSontBienRecupere()
+		{
+			int idAuteur = dal.AjouterAuteur("Asimov", "Isaac");
+			dal.AjouterLivre("I, Robot", DateTime.Parse("12/02/1950"), idAuteur);
+			dal.AjouterLivre("The caves of steel", DateTime.Parse("02/04/1954"), idAuteur);
+			List<Livre> tousLivres = dal.ObtenirTousLesLivres();
+
+			Assert.IsNotNull(tousLivres);
+			Assert.AreEqual(tousLivres.Count, 2);
+			Assert.AreEqual("I, Robot", tousLivres[0].Nom);
+			Assert.AreEqual("The caves of steel", tousLivres[1].Nom);
 		}
 	}
 }

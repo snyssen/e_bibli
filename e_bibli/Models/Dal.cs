@@ -34,6 +34,10 @@ namespace e_bibli.Models
 		{
 			return bdd.Auteurs.FirstOrDefault(auteur => auteur.ID == id);
 		}
+		public Auteur ObtenirAuteur(string nom)
+		{
+			return bdd.Auteurs.FirstOrDefault(auteur => auteur.Nom == nom);
+		}
 		public void ModifierAuteur(int id, string nom, string prenom)
 		{
 			Auteur auteurTrouve = bdd.Auteurs.FirstOrDefault(auteur => auteur.ID == id);
@@ -51,12 +55,15 @@ namespace e_bibli.Models
 			else
 				return false;
 		}
+		public bool AuteurExiste(int IDauteur)
+		{
+			if (bdd.Auteurs.FirstOrDefault(auteur => auteur.ID == IDauteur) != null)
+				return true;
+			else
+				return false;
+		}
 
 		// Client
-		public List<Livre> ObtenirTousLesLivres()
-		{
-			return bdd.Livres.ToList();
-		}
 		public Client ObtenirClient(int id)
 		{
 			return bdd.Clients.FirstOrDefault(client => client.ID == id);
@@ -86,9 +93,9 @@ namespace e_bibli.Models
 		}
 
 		// Livre
-		public int AjouterLivre(string titre, DateTime dateParution, Auteur auteur)
+		public int AjouterLivre(string titre, DateTime dateParution, int IDauteur)
 		{
-			Livre livreAjoute = bdd.Livres.Add(new Livre { Nom = titre, DateParution = dateParution, Auteur = auteur });
+			Livre livreAjoute = bdd.Livres.Add(new Livre { Nom = titre, DateParution = dateParution, IDAuteur = IDauteur });
 			bdd.SaveChanges();
 			return livreAjoute.ID;
 		}
@@ -96,6 +103,22 @@ namespace e_bibli.Models
 		{
 			return bdd.Livres.FirstOrDefault(livre => livre.ID == id);
 		}
+		public List<Livre> ObtenirTousLesLivres()
+		{
+			return bdd.Livres.ToList();
+		}
+		public List<Livre> ObtenirLivresAuteur(int  IDauteur)
+		{
+			return bdd.Livres.Where(livre => livre.IDAuteur == IDauteur).ToList();
+		}
+		public bool LivreExiste(int IDlivre)
+		{
+			if (bdd.Livres.FirstOrDefault(livre => livre.ID == IDlivre) != null)
+				return true;
+			else
+				return false;
+		}
+
 
 		// Emprunt
 		public int AjouterEmprunt(int idClient, int idLivre, DateTime dateEmprunt)
@@ -140,7 +163,14 @@ namespace e_bibli.Models
 		{
 			return bdd.Emprunts.FirstOrDefault(emprunt => emprunt.ID == id);
 		}
-
+		public List<Emprunt> ObtenirEmpruntsClient(int IDclient)
+		{
+			return bdd.Emprunts.Where(emprunt => emprunt.IDClient == IDclient).ToList();
+		}
+		public List<Emprunt> ObtenirEmpruntsLivre(int IDlivre)
+		{
+			return bdd.Emprunts.Where(emprunt => emprunt.IDLivre == IDlivre).ToList();
+		}
 
 		private string EncodeMD5(string motDePasse)
 		{

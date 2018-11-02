@@ -169,7 +169,6 @@
     <Compile Include="ViewModels\Afficher\AuteursViewModel.cs" />
     <Compile Include="ViewModels\Afficher\AuteurViewModel.cs" />
     <Compile Include="ViewModels\Afficher\IndexViewModel.cs" />
-    <Compile Include="ViewModels\Afficher\LivreViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -215,7 +214,6 @@
     <Content Include="Views\Afficher\Index.cshtml" />
     <Content Include="Views\Afficher\Auteurs.cshtml" />
     <Content Include="Views\Afficher\Auteur.cshtml" />
-    <Content Include="Views\Afficher\Livre.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

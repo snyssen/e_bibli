@@ -16,6 +16,6 @@ namespace e_bibli.Models
 		public int IDLivre { get; set; }
 		[Required]
 		public DateTime DateEmprunt { get; set; }
-		public DateTime DateRetour { get; set; }
+		public DateTime? DateRetour { get; set; }
 	}
 }

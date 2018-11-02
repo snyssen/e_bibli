@@ -1,0 +1,25 @@
+﻿@using e_bibli.Models
+@model e_bibli.ViewModels.Afficher.AuteurViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Auteur</title>
+</head>
+<body>
+    <h1>@Model.auteur.Nom @Model.auteur.Prenom</h1>
+	<p>a écrit :</p>
+	<ul>
+		@foreach (Livre livre in Model.livres)
+		{
+			<li>@livre.Nom (@livre.DateParution.ToShortDateString())</li>
+		}
+	</ul>
+</body>
+</html>
